@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>【GAMEACG】</title>
+    <title>GAMEACG</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
     <style>
         body { background:#000; color:#fff; margin:0; padding:10px; font-family:sans-serif; }
@@ -47,7 +47,7 @@
         }
       },
       mounted() {
-        fetch('【https://script.google.com/macros/s/AKfycbyHk-HuIcVQtarpXkwQgJjgIZ5oZMYg8hUl3pNL7QmKNCHp9d_MoUO8b6Y7sX9DeSQmMw/exec】')
+        fetch('https://script.google.com/macros/s/AKfycbyHk-HuIcVQtarpXkwQgJjgIZ5oZMYg8hUl3pNL7QmKNCHp9d_MoUO8b6Y7sX9DeSQmMw/exec')
           .then(r => r.json())
           .then(d => this.games = d)
           .catch(() => alert('加载失败，检查网络或联系作者'));
