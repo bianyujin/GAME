@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【GAMEACG】</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+    <style>
+        body { background:#000; color:#fff; margin:0; padding:10px; font-family:sans-serif; }
+        input { width:100%; padding:15px; margin:20px 0; background:#333; color:#fff; border:none; border-radius:10px; font-size:18px; box-sizing:border-box; }
+        .card { background:#222; margin:15px 0; padding:20px; border-radius:15px; box-shadow:0 4px 12px rgba(255,102,204,0.3); }
+        .card img { width:100%; border-radius:10px; }
+        .card h2 { margin:10px 0; color:#ff99ff; }
+        .card p { margin:5px 0; line-height:1.6; }
+        .card a { color:#66ccff; font-size:18px; text-decoration:none; }
+        .loading { text-align:center; padding:100px; font-size:20px; }
+        .update { position:fixed; bottom:20px; right:20px; background:#ff3399; color:white; padding:15px; border-radius:50%; font-size:24px; box-shadow:0 4px 8px rgba(0,0,0,0.5); cursor:pointer; }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="loading" v-if="games.length === 0">加载中...</div>
+        <input v-model="search" placeholder="搜索游戏名 / 类型 / 标签">
+        <div class="card" v-for="game in filtered" :key="game.游戏ID">
+            <img :src="game.封面链接" alt="封面">
+            <h2>{{game.游戏名}}</h2>
+            <p>类型：{{game.类型}} | 版本：{{game.版本}}</p>
+            <p>标签：{{game.标签}}</p>
+            <p><a :href="game.下载链接" target="_blank">下载链接</a></p>
+        </div>
+    </div>
+    <div class="update" onclick="location.reload()">🔄</div>
+
+    <script>
+    const { createApp } = Vue
+    createApp({
+      data() { return { games: [], search: '' } },
+      computed: {
+        filtered() {
+          if (!this.search) return this.games;
+          const s = this.search.toLowerCase();
+          return this.games.filter(g => 
+            (g.游戏名 || '').toLowerCase().includes(s) ||
+            (g.类型 || '').toLowerCase().includes(s) ||
+            (g.标签 || '').toLowerCase().includes(s)
+          );
+        }
+      },
+      mounted() {
+        fetch('【https://script.google.com/macros/s/AKfycbyHk-HuIcVQtarpXkwQgJjgIZ5oZMYg8hUl3pNL7QmKNCHp9d_MoUO8b6Y7sX9DeSQmMw/exec】')
+          .then(r => r.json())
+          .then(d => this.games = d)
+          .catch(() => alert('加载失败，检查网络或联系作者'));
+      }
+    }).mount('#app')
+    </script>
+</body>
+</html>
