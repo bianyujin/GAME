@@ -50,7 +50,10 @@
         fetch('https://script.google.com/macros/s/AKfycbyHk-HuIcVQtarpXkwQgJjgIZ5oZMYg8hUl3pNL7QmKNCHp9d_MoUO8b6Y7sX9DeSQmMw/exec')
           .then(r => r.json())
           .then(d => this.games = d)
-          .catch(() => alert('加载失败，检查网络或联系作者'));
+          .catch(() => fetch('https://cdn.jsdelivr.net/gh/【用户名】/【仓库名】@main/data.json')
+            .then(r => r.json())
+            .then(d => this.games = d)
+            .catch(() => alert('加载失败，检查网络或联系作者'));
       }
     }).mount('#app')
     </script>
